@@ -1,5 +1,6 @@
 #!/usr/bin/python
 #-*-coding:utf-8-*-
+import os
 import sys
 import getopt
 import gzip
@@ -58,21 +59,27 @@ def daterange(start_date,end_date):
 
 
 if __name__ == "__main__":
-    opt,args = getopt.getopt(sys.argv[1:],"d:bd:ed:",["day=","begin-date=","end-date=","log-path="])
-    date,begin_date,end_date,log_path=None
+    opt,args = getopt.getopt(sys.argv[1:],"d:",["day=","begin-date=","end-date=","log-path="])
+    date=begin_date=end_date=log_path=None
     for name,value in opt:
         if name in('-d','--date'):
             date = value
-        if name in('-bd','--begin-date'):
-            begin_date = value
-        if name in('-ed','--end-date'):
-            end_date = value
-        if name == '--log-file':
+        if name == '--begin-date':
+            begin_date = datetime.strptime(str(value),'%Y%m%d')
+        if name == '--end-date':
+            end_date = datetime.strptime(str(value),'%Y%m%d')
+        if name == '--log-path':
             log_path = value
-    if not (begin_date and end_date):
-        print "you must set the begin-date and end-date at the same time"
-        sys.exit(0)
+    if begin_date or end_date:
+        if not (begin_date and end_date):
+            print "you must set the begin-date and end-date at the same time"
+            sys.exit(0)
     # compare end_date>begin_date
     if not log_path:
         log_path = '/var/log/nginx'
+    current_dir = os.path.dirname(os.path.abspath(__file__))
     log_file_list = []
+    if begin_date:
+        for date in daterange(begin_date,end_date):
+            date_format = datetime.strftime(date,'%Y%m%d')
+            print date_format
