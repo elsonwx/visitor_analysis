@@ -15,3 +15,6 @@ for some reson you need to set some keywords to exclude some robot visit record.
 ```python
 exclude_keywords = ['google','baidu','.aspx','spider','robots','gt-i9500']
 include_keywords = ['www.xiangblog.com']
+```
+for use this two rule,you can run
+> main.py --enable-rule
