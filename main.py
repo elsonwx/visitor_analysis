@@ -80,6 +80,7 @@ def daterange(start_date,end_date):
 if __name__ == "__main__":
     opt,args = getopt.getopt(sys.argv[1:],"d:",["day=","begin-date=","end-date=","log-path="])
     date=begin_date=end_date=log_path=None
+    enable_rule = False
     for name,value in opt:
         if name in('-d','--date'):
             date = str(value)
@@ -89,6 +90,8 @@ if __name__ == "__main__":
             end_date = datetime.strptime(str(value),'%Y%m%d')
         if name == '--log-path':
             log_path = value
+        if name == '--enable-rule':
+            enable_rule = True
     if begin_date or end_date:
         if not (begin_date and end_date):
             print "you must set the begin-date and end-date at the same time"
@@ -114,7 +117,8 @@ if __name__ == "__main__":
         if os.path.splitext(log_file)[1] == '.gz':
             target_file = os.path.join(current_dir,log_file[:-3])
             decompress_gzip(os.path.join(log_path,log_file),target_file)
-            exclude_someaccesslog(target_file,exclude_keywords,'exclude')
-            exclude_someaccesslog(target_file,include_keywords,'include')
+            if enable_rule:
+                exclude_someaccesslog(target_file,exclude_keywords,'exclude')
+                exclude_someaccesslog(target_file,include_keywords,'include')
             print_visitor_address(target_file)
             os.remove(target_file)
