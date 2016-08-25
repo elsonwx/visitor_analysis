@@ -11,10 +11,10 @@ get the visitor address for a duration
 > main.py --begin-date 20160821 --end-date 20160825
 
 # additional
-for some reson you need to set some keywords to exclude some robot visit record.you can specify the log which is to be analysised that must include some keywords and  exclude some keywords,to do that,you can change the script  line 16 and line 17.
+for some reason you need to set some keywords to exclude some robot visit records.you can specify the log which is to be analysised that must include some keywords and  exclude some keywords,to do that,you can change the script  line 16 and line 17.
 ```python
 exclude_keywords = ['google','baidu','.aspx','spider','robots','gt-i9500']
 include_keywords = ['www.xiangblog.com']
 ```
-for use this two rule,you can run
+for use these two rules,you can run
 > main.py --enable-rule
