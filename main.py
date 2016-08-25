@@ -78,7 +78,7 @@ def daterange(start_date,end_date):
 
 
 if __name__ == "__main__":
-    opt,args = getopt.getopt(sys.argv[1:],"d:",["day=","begin-date=","end-date=","log-path="])
+    opt,args = getopt.getopt(sys.argv[1:],"d:",["day=","begin-date=","end-date=","log-path=","enable-rule"])
     date=begin_date=end_date=log_path=None
     enable_rule = False
     for name,value in opt:
