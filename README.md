@@ -20,4 +20,4 @@ for use these two rules,you need to run
 > main.py --enable-rule
 
 #Example
-![example](screenshot/example.png')
+![example](screenshot/example.png)
