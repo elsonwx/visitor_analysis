@@ -48,10 +48,11 @@ def exclude_someaccesslog(target_file,keywords_list,include_or_exclude):
 def print_visitor_address(target_log_file):
     with codecs.open(target_log_file,'r','utf-8') as f:
         content = f.read()
-        ipreg = '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+        ipreg = '((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]))'
         ips = re.findall(ipreg,content)
         allip = set(ips)   
-        for ip in allip:
+        for ip_format in allip:
+            ip = ip_format[0]
             retjson = None
             try:
                 retjson =  requests.get(ip_address_api,params={'ip':ip})
