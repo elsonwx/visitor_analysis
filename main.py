@@ -28,7 +28,7 @@ def exclude_someaccesslog(target_file,keywords_list,include_or_exclude):
     '''exclude some robot access log
     it's like the effect like os.system("sed -i '/keywords/Id' target_file")
        include some domain keywords
-    it's like the effect like os.system("sed -i '/keywords/!d' target_file")
+    it's like the effect like os.system("sed -i '/keywords/I!d' target_file")
     '''
     f = open(target_file,"r+")
     lines = f.readlines()
