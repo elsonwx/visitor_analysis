@@ -14,7 +14,7 @@ import time
 
 ip_address_api = 'http://ip.taobao.com/service/getIpInfo.php'
 exclude_keywords = ['google','baidu','.aspx','spider','robots','gt-i9500']
-include_keywords = ['www.xiangblog.com']
+include_keywords = ['www.elsonwx.com']
 
 def decompress_gzip(zipfile,outfile):
     '''decompress a gzip file to outfile'''
