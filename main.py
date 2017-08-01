@@ -16,8 +16,8 @@ import time
 
 
 ip_address_api = 'http://api.elsonwx.com:3001/ip/'
-exclude_keywords = ['google','baidu','.aspx','spider','robots','gt-i9500']
-include_keywords = ['www.elsonwx.com']
+exclude_keywords = ['google', 'baidu', '.aspx', 'spider', 'robots', 'gt-i9500']
+include_keywords = []
 
 
 def decompress_gzip(zipfile, outfile):
@@ -34,15 +34,17 @@ def remove_someline(target_file, keywords_list, include_or_exclude):
        include some domain keywords
     it's like the effect like os.system("sed -i '/keywords/I!d' target_file")
     '''
+    if len(keywords_list) == 0:
+        return
     f = open(target_file, "r+")
     lines = f.readlines()
     f.seek(0)
     for line in lines:
         if include_or_exclude == 'exclude':
-            if not any(line.lower().find(keyword.lower())>-1 for keyword in keywords_list):
+            if not any(line.lower().find(keyword.lower()) >-1 for keyword in keywords_list):
                 f.write(line)
-        else: #include
-            if any(line.lower().find(keyword.lower())>-1 for keyword in keywords_list):
+        else:
+            if any(line.lower().find(keyword.lower()) > -1 for keyword in keywords_list):
                 f.write(line)
         
     f.truncate()
