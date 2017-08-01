@@ -74,7 +74,7 @@ def print_visitor_address(target_log_file):
 
 
 if __name__ == "__main__":
-    opt, args = getopt.getopt(sys.argv[1:], "d:", ["days=", "start-date=", "end-date=", "log-path=", "enable-rule", "file-name-keywords"])
+    opt, args = getopt.getopt(sys.argv[1:], "d:", ["days=", "start-date=", "end-date=", "log-path=", "file-name-keywords=", "enable-rule"])
     days = start_date_time = end_date_time = log_path = file_name_keywords = None
     enable_rule = False
     for name, value in opt:
@@ -117,7 +117,7 @@ if __name__ == "__main__":
         log_file = join(log_path, log_file)
         file_mtime = int(os.path.getmtime(log_file))
         if start_time <= file_mtime and end_time > file_mtime:
-            if file_name_keywords is Not None:
+            if file_name_keywords is not None:
                 if basename(log_file).find(file_name_keywords) > -1:
                     log_file_list.append(log_file)
             else:
