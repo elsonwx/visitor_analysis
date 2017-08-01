@@ -1,17 +1,18 @@
 # visitor_analysis
 analysis the visitor ip address from nginx log
 # Usage
-give the python script execute privileges
-> chmod +x main.py
+analysis the log file which has been modified in latest 5 days
+> python main.py -d 5
 
-get the visitor address for certain day
-> main.py -d 20160825
- 
-get the visitor address for a duration
-> main.py --begin-date 20160821 --end-date 20160825
+analysis the log file which modified time between  20170601 and 20170630
+> python main.py --start-date 20170601 --end-date 20170630 
+
+if your nginx log file is not default  `/var/log/nginx`,  you need to specify the log directory explicitly
+
+> python main.py --log-path /var/log/nginx_log_dir
 
 # Additional
-for some reason you need to set some keywords to exclude some robot visit records.you can specify the log which is to be analysised that must include some keywords and  exclude some keywords,to do that,you can change the script  line 16 and line 17.
+for some reason you need to set some keywords to exclude some robot visit records.you can specify the log which is to be analysised that must include some keywords or exclude some keywords,to do that,you can change the script  line 19 and line 20.
 ```python
 exclude_keywords = ['google','baidu','.aspx','spider','robots','gt-i9500']
 include_keywords = ['www.elsonwx.com']
