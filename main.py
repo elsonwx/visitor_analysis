@@ -51,14 +51,24 @@ def remove_someline(target_file, keywords_list, include_or_exclude):
     f.close()
 
 
+def extract_ips(fileContent):
+    pattern = r"((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)([ (\[]?(\.|dot)[ )\]]?(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3})"
+    ips = [each[0] for each in re.findall(pattern, fileContent)]
+    for item in ips:
+        location = ips.index(item)
+        ip = re.sub("[ ()\[\]]", "", item)
+        ip = re.sub("dot", ".", ip)
+        ips.remove(item)
+        ips.insert(location, ip)
+    return ips
+
+
 def print_visitor_address(target_log_file):
     with codecs.open(target_log_file, 'r', 'utf-8') as f:
         content = f.read()
-        ipreg = '((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]))'
-        ips = re.findall(ipreg, content)
+        ips = extract_ips(content)
         allip = set(ips)   
-        for ip_format in allip:
-            ip = ip_format[0]
+        for ip in allip:
             res = None
             try:
                 res = requests.get(ip_address_api + ip)
