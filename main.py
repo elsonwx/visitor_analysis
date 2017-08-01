@@ -74,8 +74,8 @@ def print_visitor_address(target_log_file):
 
 
 if __name__ == "__main__":
-    opt, args = getopt.getopt(sys.argv[1:], "d:", ["days=", "start-date=", "end-date=", "log-path=", "enable-rule"])
-    days = start_date_time = end_date_time = log_path = None
+    opt, args = getopt.getopt(sys.argv[1:], "d:", ["days=", "start-date=", "end-date=", "log-path=", "enable-rule", "file-name-keywords"])
+    days = start_date_time = end_date_time = log_path = file_name_keywords = None
     enable_rule = False
     for name, value in opt:
         if name in('-d', '--days'):
@@ -86,6 +86,8 @@ if __name__ == "__main__":
             end_date_time = datetime.strptime(str(value),'%Y%m%d')
         if name == '--log-path':
             log_path = str(value)
+        if name == '--file-name-keywords':
+            file_name_keywords = str(value)
         if name == '--enable-rule':
             enable_rule = True
     if start_date_time or end_date_time:
@@ -115,7 +117,11 @@ if __name__ == "__main__":
         log_file = join(log_path, log_file)
         file_mtime = int(os.path.getmtime(log_file))
         if start_time <= file_mtime and end_time > file_mtime:
-            log_file_list.append(log_file)
+            if file_name_keywords is Not None:
+                if basename(log_file).find(file_name_keywords) > -1:
+                    log_file_list.append(log_file)
+            else:
+                log_file_list.append(log_file)
     for log_file in log_file_list:
         target_file = None
         if os.path.splitext(log_file)[1] == '.gz':
