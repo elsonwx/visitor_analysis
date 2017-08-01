@@ -16,7 +16,7 @@ import time
 
 
 ip_address_api = 'http://api.elsonwx.com:3001/ip/'
-exclude_keywords = ['google', 'baidu', '.aspx', 'spider', 'robots', 'gt-i9500']
+exclude_keywords = []
 include_keywords = []
 
 
