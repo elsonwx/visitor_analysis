@@ -6,7 +6,7 @@ analysis the log file which has been modified in latest 5 days, the log filename
 
 analysis single file
 
-> python main.py —file-name access.log
+> python main.py --file-name access.log
 
 analysis the log file which modified time between  20170601 and 20170630
 > python main.py --start-date 20170601 --end-date 20170630 --file-name-keywords  access
