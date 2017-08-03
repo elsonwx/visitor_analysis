@@ -16,13 +16,11 @@ if your nginx log file is not default  `/var/log/nginx`,  you need to specify th
 > python main.py --log-path /var/log/nginx_log_dir --file-name-keywords access
 
 # Additional
-for some reason you need to set some keywords to exclude some robot visit records.you can specify the log which is to be analysised that must include some keywords or exclude some keywords,to do that,you can change the script  line 19 and line 20.
+Sometimes you want to exclude robot visit records.you can specify the log which is to be analysised that must include some keywords or exclude some keywords,to do that,you can change the script  line 19 and line 20.
 ```python
 exclude_keywords = ['google','baidu','.aspx','spider','robots','gt-i9500']
 include_keywords = ['www.elsonwx.com']
 ```
-for use these two rules,you need to run
-> main.py --enable-rule
+# Example
 
-#Example
 ![example](screenshot/example.png)

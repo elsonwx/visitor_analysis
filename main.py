@@ -84,7 +84,7 @@ def print_visitor_address(target_log_file):
 
 
 if __name__ == "__main__":
-    opt, args = getopt.getopt(sys.argv[1:], "d:", ["days=", "start-date=", "end-date=", "log-path=", "file-name=", "file-name-keywords=", "enable-rule"])
+    opt, args = getopt.getopt(sys.argv[1:], "d:", ["days=", "start-date=", "end-date=", "log-path=", "file-name=", "file-name-keywords="])
     days = start_date_time = end_date_time = log_path = file_name = file_name_keywords = None
     enable_rule = False
     for name, value in opt:
@@ -100,8 +100,6 @@ if __name__ == "__main__":
             file_name = str(value)
         if name == '--file-name-keywords':
             file_name_keywords = str(value)
-        if name == '--enable-rule':
-            enable_rule = True
     if start_date_time or end_date_time:
         if not (start_date_time and end_date_time):
             print "you must set the start-date and the end-date at the same time"
@@ -145,8 +143,7 @@ if __name__ == "__main__":
         else:
             shutil.copy2(log_file, current_dir)
             target_file = join(current_dir, basename(log_file))
-        if enable_rule:
-            remove_someline(target_file, exclude_keywords, 'exclude')
-            remove_someline(target_file, include_keywords, 'include')
+        remove_someline(target_file, exclude_keywords, 'exclude')
+        remove_someline(target_file, include_keywords, 'include')
         print_visitor_address(target_file)
         os.remove(target_file)
