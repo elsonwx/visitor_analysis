@@ -15,7 +15,7 @@ from os.path import isfile, join, basename
 import time
 
 
-ip_address_api = 'http://api.elsonwx.com:3001/ip/'
+ip_address_api = 'http://api.elsonwx.com:3001/ipipnet/'
 exclude_keywords = []
 include_keywords = []
 
@@ -76,7 +76,7 @@ def print_visitor_address(target_log_file):
                 continue
             try:
                 ret_obj = json.loads(res.text)
-                ip_location = ret_obj['ipipnet_location']
+                ip_location = ret_obj['location']
                 print "ip:%s,location:%s,file:%s" % (ip, ip_location, basename(target_log_file))
                 time.sleep(1)
             except Exception as e:
